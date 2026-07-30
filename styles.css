@@ -9,9 +9,9 @@ body {
     background-color: aliceblue;
     height: 100vh;
     width: 100vw;
-    padding: 90px;
+    /* padding: 90px; */
     cursor: url('./assets/cursors/default.svg'), auto;
-    background-image: url('./assets/background2.gif');
+    background-image: url('./assets/background3.gif');
     background-size: cover;
 
 }
@@ -117,8 +117,14 @@ body {
 
 
 .app-content {
+    padding-left: 20px;
+    padding-right: 20px;
     position: relative;
     /* filter: blur(2px); */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    place-items: start;
+    gap: 10px;
 }
 
 .new-idea-container {
@@ -142,6 +148,8 @@ body {
 }
 
 .idea-name {
+    max-width: 190px;
+    overflow-wrap: break-word;
     color: #433AD0;
     margin: 0px;
     font-family: 'progoth';
@@ -262,7 +270,8 @@ body {
 }
 
 .raw-ideas-container {
-    max-width: 326px;
+    max-width: 400px;
+    min-width: 400px;
     background-color: #FEF9EE;
     box-shadow: 0px 2px 0px 0px #A19CC8,
         0px -2px 0px 0px #A19CC8,
@@ -285,6 +294,7 @@ body {
 }
 
 .raw-ideas-heading {
+    text-align: center;
     color: #23224B;
     font-family: 'progoth';
 
@@ -359,6 +369,20 @@ body {
     margin: 0;
 }
 
+.idea-tag-telegram-bot {
+    font-family: 'progoth';
+    font-size: 12px;
+    color: #433AD0;
+    background-color: #F4F0FE;
+    box-shadow: 0px 2px 0px 0px #C4BCE8,
+        0px -2px 0px 0px #C4BCE8,
+        2px 0px 0px 0px #C4BCE8,
+        -2px 0px 0px 0px #C4BCE8;
+    width: fit-content;
+    padding: 6px;
+    margin: 0;
+}
+
 .add-raw-idea {
     padding: 0;
     background: none;
@@ -393,4 +417,27 @@ body {
         repeating-linear-gradient(to bottom,
             #8783BB 0 4px,
             transparent 4px 8px) top 4px right / 1px calc(100% - 8px) no-repeat;
+}
+
+.thinked-ideas-heading {
+    /* color: #23224B;
+    font-family: 'progoth';
+    font-size: 14px; */
+}
+
+.thinked-ideas-container {
+    background-color: #F1F6FE;
+}
+
+.working-ideas-container {
+    background-color: #EDFBF3;
+}
+
+.realized-ideas-container {
+    background-color: #F6F0FE;
+}
+
+@media (max-width: 450px) {
+    .raw-ideas-heading {
+    }
 }
