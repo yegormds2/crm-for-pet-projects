@@ -12,6 +12,7 @@ body {
     /* padding: 90px; */
     cursor: url('./assets/cursors/default.svg'), auto;
     background-image: url('./assets/background3.gif');
+    background-repeat: no-repeat;
     background-size: cover;
 
 }
@@ -419,12 +420,6 @@ body {
             transparent 4px 8px) top 4px right / 1px calc(100% - 8px) no-repeat;
 }
 
-.thinked-ideas-heading {
-    /* color: #23224B;
-    font-family: 'progoth';
-    font-size: 14px; */
-}
-
 .thinked-ideas-container {
     background-color: #F1F6FE;
 }
@@ -435,9 +430,4 @@ body {
 
 .realized-ideas-container {
     background-color: #F6F0FE;
-}
-
-@media (max-width: 450px) {
-    .raw-ideas-heading {
-    }
 }

@@ -1,8 +1,12 @@
-const addNewIdeaButton = document.querySelector('.add-raw-idea')
-const rejectIdeaButton = document.querySelector('.reject-idea-button')
-const newIdeaContiner = document.querySelector('.new-idea-container')
-const allNewIdeasContainers = document.querySelectorAll('.new-idea-container')
+// const addNewIdeaButton = document.querySelector('.add-raw-idea')
+const addNewIdeaButton = document.querySelectorAll('.add-raw-idea')
+// const rejectIdeaButton = document.querySelector('.reject-idea-button')
+const rejectIdeaButton = document.getElementById('reject-idea-button')
+// const newIdeaContiner = document.querySelector('.new-idea-container')
+const newIdeaContiner = document.getElementById('new-raw-idea-container')
+const allNewIdeasContainers = document.querySelectorAll('.new-raw-idea-container')
 const appContainer = document.querySelector('.app-content')
+
 const chooseTagContainer = document.querySelector('.choose-tag-container')
 const chooseTagButton = document.querySelector('.choose-tag')
 const closetagMenuButton = document.querySelector('.idea-tag-option-back')
@@ -15,7 +19,11 @@ const newIdeaDescriptionInput = document.querySelector('.new-idea-input-descript
 const saveNewIdeaButton = document.querySelector('.save-idea-button')
 
 const rawIdeasContainer = document.querySelector('.raw-ideas-container')
-const rawIdeasHeadingContainer = document.querySelector('.headings-container')
+// const rawIdeasHeadingContainer = document.querySelector('.headings-container')
+const rawIdeasHeadingContainer = document.getElementById('raw-headings-container')
+const thinkedIdeasheadingContiner = document.getElementById('thinked-headings-container')
+const workingIdeasHeadingContainer = document.getElementById('working-headings-container')
+const realizedIdeasHeadingContainer = document.getElementById('realized-headings-container')
 
 let rawIdeasCounterNum = allNewIdeasContainers.length
 rawIdeasCounterHTML.textContent = rawIdeasCounterNum
@@ -26,11 +34,32 @@ const tagElements = {
     idea: document.querySelector('.idea-tag-option-idea')
 }
 
+let whereToPlaceNewIdea = ''
 
+addNewIdeaButton.forEach(button => {
+    button.addEventListener('click', (e) => {
+        newIdeaContiner.style.display = 'flex'
+        appContainer.style.filter = 'blur(3px)'
+        switch (e.target.dataset.add) {
+            case 'raw':
+                whereToPlaceNewIdea = 'raw'
+                console.log(whereToPlaceNewIdea)
+                break
+            case 'thinked':
+                whereToPlaceNewIdea = 'thinked'
+                console.log(whereToPlaceNewIdea)
+                break
+            case 'working':
+                whereToPlaceNewIdea = 'working'
+                console.log(whereToPlaceNewIdea)
+                break
+            case 'realized':
+                whereToPlaceNewIdea = 'realized'
+                console.log(whereToPlaceNewIdea)
+                break
+        }
 
-addNewIdeaButton.addEventListener('click', () => {
-    newIdeaContiner.style.display = 'flex'
-    appContainer.style.filter = 'blur(3px)'
+    })
 })
 
 rejectIdeaButton.addEventListener('click', () => {
@@ -121,10 +150,11 @@ newIdeaDescriptionInput.addEventListener('input', (e) => {
 
 saveNewIdeaButton.addEventListener('click', () => {
     if (newIdeaNameInputResult !== '' && newIdeaDescriptionResult !== '' && tagButtonContainer.lastChild.tagName == 'P') {
-        rawIdeasCounterNum += 1
-        rawIdeasCounterHTML.textContent = rawIdeasCounterNum
-        // element.style.removeProperty('background-color');
-        const htmlString = `
+        switch (whereToPlaceNewIdea) {
+            case 'raw':
+                rawIdeasCounterNum += 1
+                rawIdeasCounterHTML.textContent = rawIdeasCounterNum
+                const htmlString = `
         <div class="idea-container">
             <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
             <p class="idea-description">${newIdeaDescriptionResult}</p>
@@ -134,19 +164,96 @@ saveNewIdeaButton.addEventListener('click', () => {
             >
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
-        newIdeaNameInputResult = ''
-        newIdeaDescriptionResult = ''
-        rawIdeasHeadingContainer.insertAdjacentHTML('afterend', htmlString)
-        tagButtonContainer.lastChild.remove()
-        newIdeaContiner.style.display = 'none'
-        appContainer.style.filter = 'blur(0px)'
-        chooseTagButton.style.display = 'block'
-        chooseTagButton.style.display = 'block'
-        newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
-        newIdeadNameInput.value = ''
-        newIdeaDescriptionInput.value = ''
+                newIdeaNameInputResult = ''
+                newIdeaDescriptionResult = ''
+                rawIdeasHeadingContainer.insertAdjacentHTML('afterend', htmlString)
+                tagButtonContainer.lastChild.remove()
+                newIdeaContiner.style.display = 'none'
+                appContainer.style.filter = 'blur(0px)'
+                chooseTagButton.style.display = 'block'
+                chooseTagButton.style.display = 'block'
+                newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
+                newIdeadNameInput.value = ''
+                newIdeaDescriptionInput.value = ''
+                whereToPlaceNewIdea = ''
+                break
+            case 'thinked':
+                const htmlStringThinked = `
+        <div class="idea-container">
+            <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
+            <p class="idea-description">${newIdeaDescriptionResult}</p>
+            <p 
+                class="${tagButtonContainer.lastElementChild.classList[0]}"
+                style="justify-self: unset; width: fit-content;"
+            >
+                ${tagButtonContainer.lastChild.textContent}</p>
+        </div>`
+                newIdeaNameInputResult = ''
+                newIdeaDescriptionResult = ''
+                thinkedIdeasheadingContiner.insertAdjacentHTML('afterend', htmlStringThinked)
+                tagButtonContainer.lastChild.remove()
+                newIdeaContiner.style.display = 'none'
+                appContainer.style.filter = 'blur(0px)'
+                chooseTagButton.style.display = 'block'
+                chooseTagButton.style.display = 'block'
+                newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
+                newIdeadNameInput.value = ''
+                newIdeaDescriptionInput.value = ''
+                whereToPlaceNewIdea = ''
+                break 
+            case 'working':
+                const htmlStringThinkedWorking = `
+        <div class="idea-container">
+            <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
+            <p class="idea-description">${newIdeaDescriptionResult}</p>
+            <p 
+                class="${tagButtonContainer.lastElementChild.classList[0]}"
+                style="justify-self: unset; width: fit-content;"
+            >
+                ${tagButtonContainer.lastChild.textContent}</p>
+        </div>`
+                newIdeaNameInputResult = ''
+                newIdeaDescriptionResult = ''
+                workingIdeasHeadingContainer.insertAdjacentHTML('afterend', htmlStringThinkedWorking)
+                tagButtonContainer.lastChild.remove()
+                newIdeaContiner.style.display = 'none'
+                appContainer.style.filter = 'blur(0px)'
+                chooseTagButton.style.display = 'block'
+                chooseTagButton.style.display = 'block'
+                newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
+                newIdeadNameInput.value = ''
+                newIdeaDescriptionInput.value = ''
+                whereToPlaceNewIdea = ''
+                break
+            case 'realized':
+                const htmlStringThinkedRealized = `
+        <div class="idea-container">
+            <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
+            <p class="idea-description">${newIdeaDescriptionResult}</p>
+            <p 
+                class="${tagButtonContainer.lastElementChild.classList[0]}"
+                style="justify-self: unset; width: fit-content;"
+            >
+                ${tagButtonContainer.lastChild.textContent}</p>
+        </div>`
+                newIdeaNameInputResult = ''
+                newIdeaDescriptionResult = ''
+                realizedIdeasHeadingContainer.insertAdjacentHTML('afterend', htmlStringThinkedRealized)
+                tagButtonContainer.lastChild.remove()
+                newIdeaContiner.style.display = 'none'
+                appContainer.style.filter = 'blur(0px)'
+                chooseTagButton.style.display = 'block'
+                chooseTagButton.style.display = 'block'
+                newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
+                newIdeadNameInput.value = ''
+                newIdeaDescriptionInput.value = ''
+                whereToPlaceNewIdea = ''
+                break                              
+        }
+
     } else {
         alert('Заполните поля!')
     }
 })
 
+const addThinkedIdeaButton = document.getElementById('add-thinked-idea')

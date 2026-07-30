@@ -13,25 +13,25 @@
     <div class="app-content">
         <!-- RAW IDEA -->
         <div class="raw-ideas-container">
-            <div class="headings-container">
+            <div class="headings-container" id="raw-headings-container">
                 <img src="./assets/lamp-icon.png" alt="lamp-icon" class="raw-ideas-icon">
                 <h1 class="raw-ideas-heading">Сырая идея</h1>
                 <h1 class="raw-ideas-counter">4</h1>
             </div>
-            <div class="idea-container">
+            <!-- <div class="idea-container">
                 <h1 class="idea-heading">Трекер Привычек</h1>
                 <p class="idea-description">Простое приложение для формирования полезных привычек.</p>
                 <p class="idea-tag">Мобильное приложение</p>
-            </div>
-            <button class="add-raw-idea">
-                <div class="button-container">
+            </div> -->
+            <button class="add-raw-idea" id="add-raw-idea">
+                <div data-add="raw" class="button-container">
                     + Добавить идею
                 </div>
             </button>
         </div>
         <!-- THINKED IDEA -->
         <div class="raw-ideas-container thinked-ideas-container">
-            <div class="headings-container">
+            <div id="thinked-headings-container" class="headings-container">
                 <img src="./assets/book-icon.png" alt="lamp-icon" class="raw-ideas-icon">
                 <h1 class="raw-ideas-heading thinked-ideas-heading">Проработанная идея</h1>
                 <h1 class="raw-ideas-counter">4</h1>
@@ -41,15 +41,15 @@
                 <p class="idea-description">Простое приложение для формирования полезных привычек.</p>
                 <p class="idea-tag">Мобильное приложение</p>
             </div> -->
-            <button class="add-raw-idea">
-                <div class="button-container">
+            <button id="add-thinked-idea" class="add-raw-idea">
+                <div data-add="thinked"  class="button-container">
                     + Добавить идею
                 </div>
             </button>
         </div>
         <!-- WORKING ON IDEA -->
         <div class="raw-ideas-container working-ideas-container">
-            <div class="headings-container">
+            <div id="working-headings-container" class="headings-container">
                 <img src="./assets/rocket-icon.png" alt="lamp-icon" class="raw-ideas-icon">
                 <h1 class="raw-ideas-heading">Идея в работе</h1>
                 <h1 class="raw-ideas-counter">4</h1>
@@ -60,14 +60,14 @@
                 <p class="idea-tag">Мобильное приложение</p>
             </div> -->
             <button class="add-raw-idea">
-                <div class="button-container">
+                <div data-add="working" class="button-container">
                     + Добавить идею
                 </div>
             </button>
         </div>
         <!-- REALIZED IDEA -->
         <div class="raw-ideas-container realized-ideas-container">
-            <div class="headings-container">
+            <div id="realized-headings-container" class="headings-container">
                 <img src="./assets/cup-icon.png" alt="lamp-icon" class="raw-ideas-icon">
                 <h1 class="raw-ideas-heading">Реализованная идея</h1>
                 <h1 class="raw-ideas-counter">4</h1>
@@ -78,14 +78,14 @@
                 <p class="idea-tag">Мобильное приложение</p>
             </div> -->
             <button class="add-raw-idea">
-                <div class="button-container">
+                <div data-add="realized" class="button-container">
                     + Добавить идею
                 </div>
             </button>
         </div>
 
     </div>
-    <div class="new-idea-container">
+    <div class="new-idea-container new-raw-idea-container" id="new-raw-idea-container">
         <h1 class="idea-name">НОВАЯ ИДЕЯ</h1>
         <div class="new-idea-inputs-container">
             <p>НАЗВАНИЕ:</p>
@@ -98,8 +98,8 @@
             <button class="choose-tag">Выбрать тег</button>
         </div>
         <div class="new-idea-buttons-container">
-            <button class="reject-idea-button">ОТМЕНА</button>
-            <button class="save-idea-button">СОХРАНИТЬ</button>
+            <button class="reject-idea-button" id="reject-idea-button">ОТМЕНА</button>
+            <button id="save-thinked-idea-button" class="save-idea-button">СОХРАНИТЬ</button>
         </div>
 
     </div>
