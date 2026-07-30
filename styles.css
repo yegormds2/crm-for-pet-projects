@@ -1,0 +1,396 @@
+* {
+    box-sizing: border-box;
+
+}
+
+
+body {
+    margin: 0;
+    background-color: aliceblue;
+    height: 100vh;
+    width: 100vw;
+    padding: 90px;
+    cursor: url('./assets/cursors/default.svg'), auto;
+    background-image: url('./assets/background2.gif');
+    background-size: cover;
+
+}
+
+@font-face {
+    font-family: 'Koganejidainogemu';
+    src: url('assets/fonts/Koganejidainogemu_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'JF Dot Shinonome Gothic 14';
+    src: url('assets/fonts/JF-Dot-Shinonome-14-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'progoth';
+    src: url('assets/fonts/progoth.ttf') format('truetype');
+}
+
+.choose-tag-container {
+    position: absolute;
+    inset: 0;
+    place-self: center;
+    background-color: #FFF6E3;
+    display: none;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+    gap: 15px;
+    padding: 20px;
+    padding-top: 15px;
+    box-shadow: 0px 2px 0px 0px #b0b0b044,
+        0px -2px 0px 0px #b0b0b044,
+        2px 0px 0px 0px #b0b0b044,
+        -2px 0px 0px 0px #b0b0b044;
+    padding-bottom: 10px;
+}
+
+.idea-tag-option-mobile-app,
+.idea-tag-option-telegram-bot,
+.idea-tag-option-web-servise,
+.idea-tag-option-idea,
+.idea-tag-option-back {
+    cursor: url('/assets/cursors/pointer.svg'), auto;
+    justify-self: stretch;
+    text-align: center;
+    font-family: 'progoth';
+    font-size: 10px;
+    padding: 6px;
+    margin: 0;
+}
+
+.idea-tag-option-mobile-app {
+
+    color: #E34C1E;
+    background-color: #FFF6E3;
+    box-shadow: 0px 2px 0px 0px #FED697,
+        0px -2px 0px 0px #FED697,
+        2px 0px 0px 0px #FED697,
+        -2px 0px 0px 0px #FED697;
+}
+
+.idea-tag-option-telegram-bot {
+    color: #433AD0;
+    background-color: #F4F0FE;
+    box-shadow: 0px 2px 0px 0px #C4BCE8,
+        0px -2px 0px 0px #C4BCE8,
+        2px 0px 0px 0px #C4BCE8,
+        -2px 0px 0px 0px #C4BCE8;
+}
+
+.idea-tag-option-web-servise {
+    color: #FE3449;
+    background-color: #FEEDF3;
+    box-shadow: 0px 2px 0px 0px #F5B0C2,
+        0px -2px 0px 0px #F5B0C2,
+        2px 0px 0px 0px #F5B0C2,
+        -2px 0px 0px 0px #F5B0C2;
+}
+
+.idea-tag-option-idea {
+    color: #10690E;
+    background-color: #EBFAEA;
+    box-shadow: 0px 2px 0px 0px #C1E4C3,
+        0px -2px 0px 0px #C1E4C3,
+        2px 0px 0px 0px #C1E4C3,
+        -2px 0px 0px 0px #C1E4C3;
+}
+
+.idea-tag-option-back {
+    justify-self: center;
+    width: fit-content;
+    margin: 0;
+    padding-bottom: 2px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    background-color: #aeaeb1;
+    box-shadow: 0px 2px 0px 0px #bababa,
+        0px -2px 0px 0px #bababa,
+        2px 0px 0px 0px #bababa,
+        -2px 0px 0px 0px #bababa;
+}
+
+
+.app-content {
+    position: relative;
+    /* filter: blur(2px); */
+}
+
+.new-idea-container {
+    box-shadow: 0px 2px 0px 0px #bdbdbd,
+        0px -2px 0px 0px #bdbdbd,
+        2px 0px 0px 0px #bdbdbd,
+        -2px 0px 0px 0px #bdbdbd;
+
+    position: absolute;
+    /* top: 400px;
+    left: 0; */
+    inset: 0;
+    place-self: center;
+    background-color: #FCF5E3;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.idea-name {
+    color: #433AD0;
+    margin: 0px;
+    font-family: 'progoth';
+    font-size: 19px;
+}
+
+.new-idea-inputs-container p {
+    padding: 5px 0px;
+    color: #23224B;
+    margin: 0px;
+    font-family: 'Koganejidainogemu';
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.new-idea-inputs-container input {
+    border: 1px solid #94939B;
+}
+
+.new-idea-inputs-container input:hover {
+    cursor: url('./assets/cursors/text.svg'), auto;
+}
+
+.new-idea-inputs-container input[type="text"] {
+    color: #898989;
+
+    font-family: 'JF Dot Shinonome Gothic 14';
+
+}
+
+.new-idea-inputs-container input::placeholder {
+    margin: 0px;
+    padding: 5px 0px;
+    color: #898989;
+    margin: 0px;
+    font-family: 'JF Dot Shinonome Gothic 14';
+    font-size: 10px;
+    letter-spacing: -25%;
+}
+
+.new-idea-tags-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+
+.new-idea-tags-container p {
+    font-family: 'Koganejidainogemu';
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.new-idea-tags-container button {
+    cursor: url('./assets/cursors/pointer.svg'), auto;
+    border: none;
+    position: relative;
+    color: #23224B;
+    letter-spacing: -25%;
+    font-family: 'JF Dot Shinonome Gothic 14';
+    padding: 10px;
+    font-size: 10px;
+    background:
+        /* верх */
+        repeating-linear-gradient(to right,
+            #8783BB 0 4px,
+            transparent 4px 8px) top 2px left 5px / calc(100% - 8px) 1px no-repeat,
+
+        /* низ */
+        repeating-linear-gradient(to right,
+            #8783BB 0 4px,
+            transparent 4px 8px) bottom 4px left 4px / calc(100% - 8px) 1px no-repeat,
+
+        /* левая сторона */
+        repeating-linear-gradient(to bottom,
+            #8783BB 0 4px,
+            transparent 4px 8px) top 4px left / 1px calc(100% - 8px) no-repeat,
+
+        /* правая сторона */
+        repeating-linear-gradient(to bottom,
+            #8783BB 0 4px,
+            transparent 4px 8px) top 4px right / 1px calc(100% - 8px) no-repeat;
+}
+
+.new-idea-buttons-container {
+    display: flex;
+    gap: 10px;
+}
+
+.reject-idea-button {
+    cursor: url('/assets/cursors/pointer.svg'), auto;
+    color: #fff;
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 3px;
+    background-color: #94939B;
+    font-family: 'progoth';
+    font-size: 15px;
+    box-shadow: 0px 2px 0px 0px #57556c,
+        0px -2px 0px 0px #57556c,
+        2px 0px 0px 0px #57556c,
+        -2px 0px 0px 0px #57556c;
+}
+
+.save-idea-button {
+    cursor: url('/assets/cursors/pointer.svg'), auto;
+    color: #fff;
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 3px;
+    background-color: #433AD0;
+    font-family: 'progoth';
+    font-size: 15px;
+    box-shadow: 0px 2px 0px 0px #57556c,
+        0px -2px 0px 0px #57556c,
+        2px 0px 0px 0px #57556c,
+        -2px 0px 0px 0px #57556c;
+}
+
+.raw-ideas-container {
+    max-width: 326px;
+    background-color: #FEF9EE;
+    box-shadow: 0px 2px 0px 0px #A19CC8,
+        0px -2px 0px 0px #A19CC8,
+        2px 0px 0px 0px #A19CC8,
+        -2px 0px 0px 0px #A19CC8;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.raw-ideas-icon {
+    width: 43px;
+}
+
+.raw-ideas-heading,
+.raw-ideas-counter {
+    margin: 0px;
+    font-size: 18px;
+}
+
+.raw-ideas-heading {
+    color: #23224B;
+    font-family: 'progoth';
+
+}
+
+.raw-ideas-counter {
+    color: #23224B;
+    font-family: 'Koganejidainogemu';
+    font-weight: 400;
+    box-shadow: 0px 2px 0px 0px #A19CC8,
+        0px -2px 0px 0px #A19CC8,
+        2px 0px 0px 0px #A19CC8,
+        -2px 0px 0px 0px #A19CC8;
+    padding: 9px;
+}
+
+.headings-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+}
+
+.idea-container {
+    padding: 20px;
+    box-shadow: 0px 2px 0px 0px #A19CC8,
+        0px -2px 0px 0px #A19CC8,
+        2px 0px 0px 0px #A19CC8,
+        -2px 0px 0px 0px #A19CC8;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    cursor: url('/assets/cursors/pointer.svg'), auto;
+
+}
+
+.raw-ideas-icon {
+    transition: filter 0.2s ease;
+}
+
+.raw-ideas-icon:hover {
+    filter: drop-shadow(0px -5px 10px #ffdd00);
+}
+
+.idea-heading {
+    color: #23224B;
+    margin: 0px;
+    font-family: 'progoth';
+    font-size: 19px;
+}
+
+.idea-description {
+    color: #23224B;
+    font-family: 'JF Dot Shinonome Gothic 14';
+    font-size: 15px;
+    letter-spacing: -20%;
+    line-height: 140%;
+    margin: 0;
+}
+
+.idea-tag {
+    font-family: 'progoth';
+    font-size: 12px;
+    color: #E34C1E;
+    background-color: #FFF6E3;
+    box-shadow: 0px 2px 0px 0px #FED697,
+        0px -2px 0px 0px #FED697,
+        2px 0px 0px 0px #FED697,
+        -2px 0px 0px 0px #FED697;
+    width: fit-content;
+    padding: 6px;
+    margin: 0;
+}
+
+.add-raw-idea {
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: url('./assets/cursors/pointer.svg'), auto;
+}
+
+.button-container {
+    position: relative;
+    color: #23224B;
+    letter-spacing: -20%;
+    font-family: 'JF Dot Shinonome Gothic 14';
+    padding: 10px;
+    font-size: 15px;
+    background:
+        /* верх */
+        repeating-linear-gradient(to right,
+            #8783BB 0 4px,
+            transparent 4px 8px) top 2px left 5px / calc(100% - 8px) 1px no-repeat,
+
+        /* низ */
+        repeating-linear-gradient(to right,
+            #8783BB 0 4px,
+            transparent 4px 8px) bottom 4px left 4px / calc(100% - 8px) 1px no-repeat,
+
+        /* левая сторона */
+        repeating-linear-gradient(to bottom,
+            #8783BB 0 4px,
+            transparent 4px 8px) top 4px left / 1px calc(100% - 8px) no-repeat,
+
+        /* правая сторона */
+        repeating-linear-gradient(to bottom,
+            #8783BB 0 4px,
+            transparent 4px 8px) top 4px right / 1px calc(100% - 8px) no-repeat;
+}
