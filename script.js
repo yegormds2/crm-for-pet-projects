@@ -1,8 +1,5 @@
-// const addNewIdeaButton = document.querySelector('.add-raw-idea')
 const addNewIdeaButton = document.querySelectorAll('.add-raw-idea')
-// const rejectIdeaButton = document.querySelector('.reject-idea-button')
 const rejectIdeaButton = document.getElementById('reject-idea-button')
-// const newIdeaContiner = document.querySelector('.new-idea-container')
 const newIdeaContiner = document.getElementById('new-raw-idea-container')
 const allNewIdeasContainers = document.querySelectorAll('.new-raw-idea-container')
 const appContainer = document.querySelector('.app-content')
@@ -19,7 +16,6 @@ const newIdeaDescriptionInput = document.querySelector('.new-idea-input-descript
 const saveNewIdeaButton = document.querySelector('.save-idea-button')
 
 const rawIdeasContainer = document.querySelector('.raw-ideas-container')
-// const rawIdeasHeadingContainer = document.querySelector('.headings-container')
 const rawIdeasHeadingContainer = document.getElementById('raw-headings-container')
 const thinkedIdeasheadingContiner = document.getElementById('thinked-headings-container')
 const workingIdeasHeadingContainer = document.getElementById('working-headings-container')
@@ -43,22 +39,17 @@ addNewIdeaButton.forEach(button => {
         switch (e.target.dataset.add) {
             case 'raw':
                 whereToPlaceNewIdea = 'raw'
-                console.log(whereToPlaceNewIdea)
                 break
             case 'thinked':
                 whereToPlaceNewIdea = 'thinked'
-                console.log(whereToPlaceNewIdea)
                 break
             case 'working':
                 whereToPlaceNewIdea = 'working'
-                console.log(whereToPlaceNewIdea)
                 break
             case 'realized':
                 whereToPlaceNewIdea = 'realized'
-                console.log(whereToPlaceNewIdea)
                 break
         }
-
     })
 })
 
@@ -99,8 +90,6 @@ closetagMenuButton.addEventListener('click', () => {
     newIdeaContiner.style.filter = 'blur(0px)';
 })
 
-// Сделать чтобы при клике на итоговый выбранный тег его можно было изменить
-
 Object.values(tagElements).forEach(el => {
     el.addEventListener('click', (e) => {
         chooseTagButton.style.display = 'none'
@@ -133,14 +122,10 @@ Object.values(tagElements).forEach(el => {
     })
 })
 
-// WORKING WITH FORM
-
-
 let newIdeaNameInputResult = '' // yes
 newIdeadNameInput.addEventListener('input', (e) => {
     newIdeadHeading.textContent = e.target.value
     newIdeaNameInputResult = e.target.value
-
 })
 
 let newIdeaDescriptionResult = '' // yes
@@ -148,6 +133,21 @@ newIdeaDescriptionInput.addEventListener('input', (e) => {
     newIdeaDescriptionResult = e.target.value
 })
 
+function insertingIdeas(what, where) {
+    newIdeaNameInputResult = ''
+    newIdeaDescriptionResult = ''
+    where.insertAdjacentHTML('afterend', what)
+    tagButtonContainer.lastChild.remove()
+    newIdeaContiner.style.display = 'none'
+    appContainer.style.filter = 'blur(0px)'
+    chooseTagButton.style.display = 'block'
+    chooseTagButton.style.display = 'block'
+    newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
+    newIdeadNameInput.value = ''
+    newIdeaDescriptionInput.value = ''
+    whereToPlaceNewIdea = ''
+}
+// ИСПРАВИТЬ СЧЕТКИ В ЗАГОЛОВКАХ КОЛЧИСТВА ИДЕЙ
 saveNewIdeaButton.addEventListener('click', () => {
     if (newIdeaNameInputResult !== '' && newIdeaDescriptionResult !== '' && tagButtonContainer.lastChild.tagName == 'P') {
         switch (whereToPlaceNewIdea) {
@@ -164,18 +164,7 @@ saveNewIdeaButton.addEventListener('click', () => {
             >
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
-                newIdeaNameInputResult = ''
-                newIdeaDescriptionResult = ''
-                rawIdeasHeadingContainer.insertAdjacentHTML('afterend', htmlString)
-                tagButtonContainer.lastChild.remove()
-                newIdeaContiner.style.display = 'none'
-                appContainer.style.filter = 'blur(0px)'
-                chooseTagButton.style.display = 'block'
-                chooseTagButton.style.display = 'block'
-                newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
-                newIdeadNameInput.value = ''
-                newIdeaDescriptionInput.value = ''
-                whereToPlaceNewIdea = ''
+                insertingIdeas(htmlString, rawIdeasHeadingContainer)
                 break
             case 'thinked':
                 const htmlStringThinked = `
@@ -188,19 +177,8 @@ saveNewIdeaButton.addEventListener('click', () => {
             >
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
-                newIdeaNameInputResult = ''
-                newIdeaDescriptionResult = ''
-                thinkedIdeasheadingContiner.insertAdjacentHTML('afterend', htmlStringThinked)
-                tagButtonContainer.lastChild.remove()
-                newIdeaContiner.style.display = 'none'
-                appContainer.style.filter = 'blur(0px)'
-                chooseTagButton.style.display = 'block'
-                chooseTagButton.style.display = 'block'
-                newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
-                newIdeadNameInput.value = ''
-                newIdeaDescriptionInput.value = ''
-                whereToPlaceNewIdea = ''
-                break 
+                insertingIdeas(htmlStringThinked, thinkedIdeasheadingContiner)
+                break
             case 'working':
                 const htmlStringThinkedWorking = `
         <div class="idea-container">
@@ -212,18 +190,7 @@ saveNewIdeaButton.addEventListener('click', () => {
             >
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
-                newIdeaNameInputResult = ''
-                newIdeaDescriptionResult = ''
-                workingIdeasHeadingContainer.insertAdjacentHTML('afterend', htmlStringThinkedWorking)
-                tagButtonContainer.lastChild.remove()
-                newIdeaContiner.style.display = 'none'
-                appContainer.style.filter = 'blur(0px)'
-                chooseTagButton.style.display = 'block'
-                chooseTagButton.style.display = 'block'
-                newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
-                newIdeadNameInput.value = ''
-                newIdeaDescriptionInput.value = ''
-                whereToPlaceNewIdea = ''
+                insertingIdeas(htmlStringThinkedWorking, workingIdeasHeadingContainer)
                 break
             case 'realized':
                 const htmlStringThinkedRealized = `
@@ -236,24 +203,10 @@ saveNewIdeaButton.addEventListener('click', () => {
             >
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
-                newIdeaNameInputResult = ''
-                newIdeaDescriptionResult = ''
-                realizedIdeasHeadingContainer.insertAdjacentHTML('afterend', htmlStringThinkedRealized)
-                tagButtonContainer.lastChild.remove()
-                newIdeaContiner.style.display = 'none'
-                appContainer.style.filter = 'blur(0px)'
-                chooseTagButton.style.display = 'block'
-                chooseTagButton.style.display = 'block'
-                newIdeadHeading.textContent = 'НОВАЯ ИДЕЯ'
-                newIdeadNameInput.value = ''
-                newIdeaDescriptionInput.value = ''
-                whereToPlaceNewIdea = ''
-                break                              
+                insertingIdeas(htmlStringThinkedRealized, realizedIdeasHeadingContainer)
+                break
         }
-
     } else {
-        alert('Заполните поля!')
+        alert('Заполни поля!')
     }
 })
-
-const addThinkedIdeaButton = document.getElementById('add-thinked-idea')
