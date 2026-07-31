@@ -2,27 +2,131 @@ const addNewIdeaButton = document.querySelectorAll('.add-raw-idea')
 const rejectIdeaButton = document.getElementById('reject-idea-button')
 const newIdeaContiner = document.getElementById('new-raw-idea-container')
 const allNewIdeasContainers = document.querySelectorAll('.new-raw-idea-container')
+const rawIdeasContainer = document.getElementById('raw-ideas-container')
+const thinkedIdeasContainer = document.getElementById('thinked-ideas-container')
+const workingIdeasContainer = document.getElementById('working-idea-container')
+const realizedIdeasContainer = document.getElementById('realized-idea-container')
 const appContainer = document.querySelector('.app-content')
 
 const chooseTagContainer = document.querySelector('.choose-tag-container')
 const chooseTagButton = document.querySelector('.choose-tag')
 const closetagMenuButton = document.querySelector('.idea-tag-option-back')
 const tagButtonContainer = document.querySelector('.new-idea-tags-container')
-const rawIdeasCounterHTML = document.querySelector('.raw-ideas-counter')
+const rawIdeasCounterHTML = document.getElementById('raw-ideas-counter')
+const thinkedIdeasCounterHTML = document.getElementById('thinked-ideas-counter')
+const workingIdeasCounterHTML = document.getElementById('working-ideas-counter')
+const realizedIdeasCounterHTML = document.getElementById('realized-ideas-counter')
 
 const newIdeadHeading = document.querySelector('.idea-name')
 const newIdeadNameInput = document.querySelector('.new-idea-input-name')
 const newIdeaDescriptionInput = document.querySelector('.new-idea-input-description')
 const saveNewIdeaButton = document.querySelector('.save-idea-button')
 
-const rawIdeasContainer = document.querySelector('.raw-ideas-container')
 const rawIdeasHeadingContainer = document.getElementById('raw-headings-container')
 const thinkedIdeasheadingContiner = document.getElementById('thinked-headings-container')
 const workingIdeasHeadingContainer = document.getElementById('working-headings-container')
 const realizedIdeasHeadingContainer = document.getElementById('realized-headings-container')
 
-let rawIdeasCounterNum = allNewIdeasContainers.length
-rawIdeasCounterHTML.textContent = rawIdeasCounterNum
+// let rawIdeasCounterNum = 0
+// rawIdeasCounterUpdate()
+// rawIdeasCounterHTML.textContent = rawIdeasCounterNum
+// rawIdeasCounterNum = 0
+
+// const rawIdeasCounting = {
+//     rawIdeasCounterNum: 0,
+//     rawIdeasCounterUpdate() {
+//         Object.values(rawIdeasContainer.children).forEach(el => el.dataset.idea == 'raw' ? rawIdeasCounterNum += 1 : rawIdeasCounterNum += 0)
+//     }
+// }
+
+// const ideasCounting = {
+//     rawIdeasCounting: {
+//         rawIdeasCounterNum: 0,
+//         rawIdeasCounterUpdate() {
+//             Object.values(rawIdeasContainer.children).forEach(el => el.dataset.idea == 'raw' ? rawIdeasCounterNum += 1 : rawIdeasCounterNum += 0)
+//         }
+//     },
+//     thinkedIdeasCounting: {
+//         thinkedIdeasCounterNum: 0,
+//         thinkedIdeasCounterUpdate() {
+//             Object.values(thinkedIdeasContainer.children).forEach(el => el.dataset.idea == 'thinked' ? thnkedIdeasCounterNum += 1 : thnkedIdeasCounterNum += 0)            
+//         }
+//     }
+// }
+
+const ideasTypeContainers = [
+    rawIdeasContainer,
+    thinkedIdeasContainer,
+    workingIdeasContainer,
+    realizedIdeasContainer
+]
+
+const ideasTypeCountersHTML = [
+    rawIdeasCounterHTML,
+    thinkedIdeasCounterHTML,
+    workingIdeasCounterHTML,
+    realizedIdeasCounterHTML
+]
+
+const ideasCounting = {
+        counterRaw: 0,
+        counterThinked: 0,
+        counterWorking: 0,
+        counterRealized: 0,
+        counterUpdate(container, whatCounter) {
+            switch(whatCounter) {
+                case 'raw':
+                    this.counterRaw = 0
+                    Object.values(container.children).forEach(el => {
+                        if (el.dataset.idea == 'raw') {
+                            this.counterRaw += 1
+                        } 
+                    })
+                    break
+                case 'thinked':
+                    this.counterThinked = 0
+                    Object.values(container.children).forEach(el => {
+                        if (el.dataset.idea == 'thinked') {
+                            this.counterThinked += 1
+                        } 
+                    })
+                    break
+                case 'working':
+                    this.counterWorking = 0
+                    Object.values(container.children).forEach(el => {
+                        if (el.dataset.idea == 'working') {
+                            this.counterWorking += 1
+                        } 
+                    })
+                    break
+                case 'realized':
+                    this.counterRealized = 0
+                    Object.values(container.children).forEach(el => {
+                        if (el.dataset.idea == 'realized') {
+                            this.counterRealized += 1
+                        } 
+                    })
+                    break
+            }
+    }
+}
+
+
+function updateAllCounters() {
+    ideasTypeContainers.forEach(el => {
+        ideasCounting.counterUpdate(el, el.dataset.idea)
+    })
+    rawIdeasCounterHTML.dataset.counter = ideasCounting.counterRaw
+    thinkedIdeasCounterHTML.dataset.counter = ideasCounting.counterThinked
+    workingIdeasCounterHTML.dataset.counter = ideasCounting.counterWorking
+    realizedIdeasCounterHTML.dataset.counter = ideasCounting.counterRealized
+}
+
+updateAllCounters()
+ideasTypeCountersHTML.forEach(el => {
+    el.textContent = el.dataset.counter
+})
+
 const tagElements = {
     mobileApp: document.querySelector('.idea-tag-option-mobile-app'),
     telegramBot: document.querySelector('.idea-tag-option-telegram-bot'),
@@ -152,10 +256,8 @@ saveNewIdeaButton.addEventListener('click', () => {
     if (newIdeaNameInputResult !== '' && newIdeaDescriptionResult !== '' && tagButtonContainer.lastChild.tagName == 'P') {
         switch (whereToPlaceNewIdea) {
             case 'raw':
-                rawIdeasCounterNum += 1
-                rawIdeasCounterHTML.textContent = rawIdeasCounterNum
                 const htmlString = `
-        <div class="idea-container">
+        <div data-idea="raw" id="raw-idea-container" class="idea-container">
             <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
             <p class="idea-description">${newIdeaDescriptionResult}</p>
             <p 
@@ -165,10 +267,12 @@ saveNewIdeaButton.addEventListener('click', () => {
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
                 insertingIdeas(htmlString, rawIdeasHeadingContainer)
+                ideasCounting.counterUpdate(rawIdeasContainer, 'raw')
+                rawIdeasCounterHTML.textContent = ideasCounting.counterRaw
                 break
             case 'thinked':
                 const htmlStringThinked = `
-        <div class="idea-container">
+        <div data-idea="thinked" class="idea-container">
             <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
             <p class="idea-description">${newIdeaDescriptionResult}</p>
             <p 
@@ -178,10 +282,12 @@ saveNewIdeaButton.addEventListener('click', () => {
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
                 insertingIdeas(htmlStringThinked, thinkedIdeasheadingContiner)
+                ideasCounting.counterUpdate(thinkedIdeasContainer, 'thinked')
+                thinkedIdeasCounterHTML.textContent = ideasCounting.counterThinked
                 break
             case 'working':
                 const htmlStringThinkedWorking = `
-        <div class="idea-container">
+        <div data-idea="working" class="idea-container">
             <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
             <p class="idea-description">${newIdeaDescriptionResult}</p>
             <p 
@@ -191,10 +297,12 @@ saveNewIdeaButton.addEventListener('click', () => {
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
                 insertingIdeas(htmlStringThinkedWorking, workingIdeasHeadingContainer)
+                ideasCounting.counterUpdate(workingIdeasContainer, 'working')
+                workingIdeasCounterHTML.textContent = ideasCounting.counterWorking
                 break
             case 'realized':
                 const htmlStringThinkedRealized = `
-        <div class="idea-container">
+        <div data-idea="realized" class="idea-container">
             <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
             <p class="idea-description">${newIdeaDescriptionResult}</p>
             <p 
@@ -204,6 +312,8 @@ saveNewIdeaButton.addEventListener('click', () => {
                 ${tagButtonContainer.lastChild.textContent}</p>
         </div>`
                 insertingIdeas(htmlStringThinkedRealized, realizedIdeasHeadingContainer)
+                ideasCounting.counterUpdate(realizedIdeasContainer, 'realized')
+                realizedIdeasCounterHTML.textContent = ideasCounting.counterRealized                
                 break
         }
     } else {

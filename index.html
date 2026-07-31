@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,76 +7,75 @@
     <script src="./script.js" defer></script>
     <title>Crm for pet-projects</title>
 </head>
-
 <body>
     <div class="app-content">
         <!-- RAW IDEA -->
-        <div class="raw-ideas-container">
+        <div data-idea="raw" id="raw-ideas-container" class="raw-ideas-container">
             <div class="headings-container" id="raw-headings-container">
                 <img src="./assets/lamp-icon.png" alt="lamp-icon" class="raw-ideas-icon">
                 <h1 class="raw-ideas-heading">Сырая идея</h1>
-                <h1 class="raw-ideas-counter">4</h1>
+                <h1 id="raw-ideas-counter" class="raw-ideas-counter">4</h1>
             </div>
-            <!-- <div class="idea-container">
+            <!-- <div data-idea="raw" class="idea-container">
                 <h1 class="idea-heading">Трекер Привычек</h1>
                 <p class="idea-description">Простое приложение для формирования полезных привычек.</p>
                 <p class="idea-tag">Мобильное приложение</p>
             </div> -->
-            <button class="add-raw-idea" id="add-raw-idea">
+            <button data-add="raw" class="add-raw-idea" id="add-raw-idea">
                 <div data-add="raw" class="button-container">
                     + Добавить идею
                 </div>
             </button>
         </div>
         <!-- THINKED IDEA -->
-        <div class="raw-ideas-container thinked-ideas-container">
+        <div data-idea="thinked" id="thinked-ideas-container" class="raw-ideas-container thinked-ideas-container">
             <div id="thinked-headings-container" class="headings-container">
                 <img src="./assets/book-icon.png" alt="lamp-icon" class="raw-ideas-icon">
                 <h1 class="raw-ideas-heading thinked-ideas-heading">Проработанная идея</h1>
-                <h1 class="raw-ideas-counter">4</h1>
+                <h1 id="thinked-ideas-counter" class=" raw-ideas-counter">4</h1>
             </div>
             <!-- <div class="idea-container">
                 <h1 class="idea-heading">Трекер Привычек</h1>
                 <p class="idea-description">Простое приложение для формирования полезных привычек.</p>
                 <p class="idea-tag">Мобильное приложение</p>
             </div> -->
-            <button id="add-thinked-idea" class="add-raw-idea">
+            <button data-add="thinked" id="add-thinked-idea" class="add-raw-idea">
                 <div data-add="thinked"  class="button-container">
                     + Добавить идею
                 </div>
             </button>
         </div>
         <!-- WORKING ON IDEA -->
-        <div class="raw-ideas-container working-ideas-container">
+        <div data-idea="working" id="working-idea-container" class="raw-ideas-container working-ideas-container">
             <div id="working-headings-container" class="headings-container">
                 <img src="./assets/rocket-icon.png" alt="lamp-icon" class="raw-ideas-icon">
                 <h1 class="raw-ideas-heading">Идея в работе</h1>
-                <h1 class="raw-ideas-counter">4</h1>
+                <h1 data-idea="working" id="working-ideas-counter" class="raw-ideas-counter">4</h1>
             </div>
             <!-- <div class="idea-container">
                 <h1 class="idea-heading">Трекер Привычек</h1>
                 <p class="idea-description">Простое приложение для формирования полезных привычек.</p>
                 <p class="idea-tag">Мобильное приложение</p>
             </div> -->
-            <button class="add-raw-idea">
+            <button data-add="working" class="add-raw-idea">
                 <div data-add="working" class="button-container">
                     + Добавить идею
                 </div>
             </button>
         </div>
         <!-- REALIZED IDEA -->
-        <div class="raw-ideas-container realized-ideas-container">
+        <div data-idea="realized" id="realized-idea-container" class="raw-ideas-container realized-ideas-container">
             <div id="realized-headings-container" class="headings-container">
                 <img src="./assets/cup-icon.png" alt="lamp-icon" class="raw-ideas-icon">
                 <h1 class="raw-ideas-heading">Реализованная идея</h1>
-                <h1 class="raw-ideas-counter">4</h1>
+                <h1 id="realized-ideas-counter" class="raw-ideas-counter">4</h1>
             </div>
             <!-- <div class="idea-container">
                 <h1 class="idea-heading">Трекер Привычек</h1>
                 <p class="idea-description">Простое приложение для формирования полезных привычек.</p>
                 <p class="idea-tag">Мобильное приложение</p>
             </div> -->
-            <button class="add-raw-idea">
+            <button data-add="realized" class="add-raw-idea">
                 <div data-add="realized" class="button-container">
                     + Добавить идею
                 </div>
