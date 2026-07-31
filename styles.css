@@ -327,8 +327,39 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    cursor: url('/assets/cursors/pointer.svg'), auto;
+    /* cursor: url('/assets/cursors/pointer.svg'), auto; */
+    position: relative;
+}
 
+.tag-moving-buttons-containaer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.move-buttons-container button {
+    cursor: url('/assets/cursors/pointer.svg'), auto;
+    box-shadow: 0px 2px 0px 0px #A19CC8,
+        0px -2px 0px 0px #A19CC8,
+        2px 0px 0px 0px #A19CC8,
+        -2px 0px 0px 0px #A19CC8;
+    border: none;
+    margin: 2px;
+    font-family: 'JF Dot Shinonome Gothic 14';
+    color: #65617f;
+}
+
+.heading-idea-delete-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-idea {
+    cursor: url('/assets/cursors/pointer.svg'), auto;
+    border: none;
+    font-family: 'progoth';
+    font-size: 15px;
+    color: #f70000;
+    background-color: transparent;    
 }
 
 .raw-ideas-icon {

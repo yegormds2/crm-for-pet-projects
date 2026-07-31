@@ -27,32 +27,9 @@ const thinkedIdeasheadingContiner = document.getElementById('thinked-headings-co
 const workingIdeasHeadingContainer = document.getElementById('working-headings-container')
 const realizedIdeasHeadingContainer = document.getElementById('realized-headings-container')
 
-// let rawIdeasCounterNum = 0
-// rawIdeasCounterUpdate()
-// rawIdeasCounterHTML.textContent = rawIdeasCounterNum
-// rawIdeasCounterNum = 0
-
-// const rawIdeasCounting = {
-//     rawIdeasCounterNum: 0,
-//     rawIdeasCounterUpdate() {
-//         Object.values(rawIdeasContainer.children).forEach(el => el.dataset.idea == 'raw' ? rawIdeasCounterNum += 1 : rawIdeasCounterNum += 0)
-//     }
-// }
-
-// const ideasCounting = {
-//     rawIdeasCounting: {
-//         rawIdeasCounterNum: 0,
-//         rawIdeasCounterUpdate() {
-//             Object.values(rawIdeasContainer.children).forEach(el => el.dataset.idea == 'raw' ? rawIdeasCounterNum += 1 : rawIdeasCounterNum += 0)
-//         }
-//     },
-//     thinkedIdeasCounting: {
-//         thinkedIdeasCounterNum: 0,
-//         thinkedIdeasCounterUpdate() {
-//             Object.values(thinkedIdeasContainer.children).forEach(el => el.dataset.idea == 'thinked' ? thnkedIdeasCounterNum += 1 : thnkedIdeasCounterNum += 0)            
-//         }
-//     }
-// }
+const moveIdeaLeftButton = document.getElementById('move-idea-left')
+const moveIdeaRightButton = document.getElementById('move-idea-right')
+const deleteIdeaButton = document.getElementById('delete-idea')
 
 const ideasTypeContainers = [
     rawIdeasContainer,
@@ -69,48 +46,47 @@ const ideasTypeCountersHTML = [
 ]
 
 const ideasCounting = {
-        counterRaw: 0,
-        counterThinked: 0,
-        counterWorking: 0,
-        counterRealized: 0,
-        counterUpdate(container, whatCounter) {
-            switch(whatCounter) {
-                case 'raw':
-                    this.counterRaw = 0
-                    Object.values(container.children).forEach(el => {
-                        if (el.dataset.idea == 'raw') {
-                            this.counterRaw += 1
-                        } 
-                    })
-                    break
-                case 'thinked':
-                    this.counterThinked = 0
-                    Object.values(container.children).forEach(el => {
-                        if (el.dataset.idea == 'thinked') {
-                            this.counterThinked += 1
-                        } 
-                    })
-                    break
-                case 'working':
-                    this.counterWorking = 0
-                    Object.values(container.children).forEach(el => {
-                        if (el.dataset.idea == 'working') {
-                            this.counterWorking += 1
-                        } 
-                    })
-                    break
-                case 'realized':
-                    this.counterRealized = 0
-                    Object.values(container.children).forEach(el => {
-                        if (el.dataset.idea == 'realized') {
-                            this.counterRealized += 1
-                        } 
-                    })
-                    break
-            }
+    counterRaw: 0,
+    counterThinked: 0,
+    counterWorking: 0,
+    counterRealized: 0,
+    counterUpdate(container, whatCounter) {
+        switch (whatCounter) {
+            case 'raw':
+                this.counterRaw = 0
+                Object.values(container.children).forEach(el => {
+                    if (el.dataset.idea == 'raw') {
+                        this.counterRaw += 1
+                    }
+                })
+                break
+            case 'thinked':
+                this.counterThinked = 0
+                Object.values(container.children).forEach(el => {
+                    if (el.dataset.idea == 'thinked') {
+                        this.counterThinked += 1
+                    }
+                })
+                break
+            case 'working':
+                this.counterWorking = 0
+                Object.values(container.children).forEach(el => {
+                    if (el.dataset.idea == 'working') {
+                        this.counterWorking += 1
+                    }
+                })
+                break
+            case 'realized':
+                this.counterRealized = 0
+                Object.values(container.children).forEach(el => {
+                    if (el.dataset.idea == 'realized') {
+                        this.counterRealized += 1
+                    }
+                })
+                break
+        }
     }
 }
-
 
 function updateAllCounters() {
     ideasTypeContainers.forEach(el => {
@@ -251,72 +227,172 @@ function insertingIdeas(what, where) {
     newIdeaDescriptionInput.value = ''
     whereToPlaceNewIdea = ''
 }
+
+const parentHeadingsToAdd = [
+    rawIdeasHeadingContainer,
+    thinkedIdeasheadingContiner,
+    workingIdeasHeadingContainer,
+    realizedIdeasHeadingContainer
+    ]
+
+const addNewRawIdeaButton = document.querySelector('[data-AddNewIdeaType="raw"]')
+const addNewThinkingIdeaButton = document.querySelector('[data-AddNewIdeaType="thinked"]')
+const addNewWorkedIdeaButton = document.querySelector('[data-AddNewIdeaType="working"]')
+const addNewRealizedIdeaButton = document.querySelector('[data-AddNewIdeaType="realized"]')
+
+const addNewButtons = [
+    addNewRawIdeaButton,
+    addNewThinkingIdeaButton,
+    addNewWorkedIdeaButton,
+    addNewRealizedIdeaButton
+    ]
+
+const moveRight = (e) => {
+    console.log(e.target.parentElement.parentElement.parentElement.parentElement)
+    switch (e.target.parentElement.parentElement.parentElement.parentElement.dataset.idea) {
+        case 'raw':
+            addNewThinkingIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            break
+        case 'thinked':
+            addNewWorkedIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            break
+        case 'working':
+            addNewRealizedIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            break
+    }    
+}
+
+const moveLeft = (e) => {
+    console.log(e.target.parentElement.parentElement.parentElement.parentElement)
+    switch (e.target.parentElement.parentElement.parentElement.parentElement.dataset.idea) {
+        case 'realized':
+            addNewWorkedIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            break
+        case 'working':
+            addNewThinkingIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            break
+        case 'thinked':
+            addNewRawIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            break
+    }
+}
+
+const deleteIdea = (e) => {
+    e.target.parentElement.parentElement.remove()
+}
+moveIdeaRightButton.addEventListener('click', moveRight)
+moveIdeaLeftButton.addEventListener('click', moveLeft)
+deleteIdeaButton.addEventListener('click', deleteIdea)
+
+
 // ИСПРАВИТЬ СЧЕТКИ В ЗАГОЛОВКАХ КОЛЧИСТВА ИДЕЙ
 saveNewIdeaButton.addEventListener('click', () => {
     if (newIdeaNameInputResult !== '' && newIdeaDescriptionResult !== '' && tagButtonContainer.lastChild.tagName == 'P') {
         switch (whereToPlaceNewIdea) {
             case 'raw':
                 const htmlString = `
-        <div data-idea="raw" id="raw-idea-container" class="idea-container">
-            <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
-            <p class="idea-description">${newIdeaDescriptionResult}</p>
-            <p 
-                class="${tagButtonContainer.lastElementChild.classList[0]}"
-                style="justify-self: unset; width: fit-content;"
-            >
-                ${tagButtonContainer.lastChild.textContent}</p>
-        </div>`
+                    <div data-idea="raw" id="raw-idea-container" class="idea-container">
+                    <div class="heading-idea-delete-container">
+                        <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
+                        <button onclick="deleteIdea(event)" id="delete-idea" class="delete-idea">X</button>
+                    </div>
+                        <p class="idea-description">${newIdeaDescriptionResult}</p>
+                        <div class="tag-moving-buttons-containaer">
+                        <p 
+                            class="${tagButtonContainer.lastElementChild.classList[0]}"
+                            style="justify-self: unset; width: fit-content;"
+                        >
+                            ${tagButtonContainer.lastChild.textContent}
+                        </p>
+                                <div class="move-buttons-container">
+                                    <button onclick="moveLeft(event)" id="move-idea-left"><-</button>
+                                    <button onclick="moveRight(event)" id="move-idea-right">-></button>
+                                </div>
+                        </div>
+                    </div>`
                 insertingIdeas(htmlString, rawIdeasHeadingContainer)
                 ideasCounting.counterUpdate(rawIdeasContainer, 'raw')
                 rawIdeasCounterHTML.textContent = ideasCounting.counterRaw
                 break
             case 'thinked':
                 const htmlStringThinked = `
-        <div data-idea="thinked" class="idea-container">
-            <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
-            <p class="idea-description">${newIdeaDescriptionResult}</p>
-            <p 
-                class="${tagButtonContainer.lastElementChild.classList[0]}"
-                style="justify-self: unset; width: fit-content;"
-            >
-                ${tagButtonContainer.lastChild.textContent}</p>
-        </div>`
+                    <div data-idea="thinked" class="idea-container">
+                    <div class="heading-idea-delete-container">
+                        <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
+                        <button onclick="deleteIdea(event)" id="delete-idea" class="delete-idea">X</button>
+                    </div>
+                        <p class="idea-description">${newIdeaDescriptionResult}</p>
+                        <div class="tag-moving-buttons-containaer">
+                            <p 
+                                class="${tagButtonContainer.lastElementChild.classList[0]}"
+                                style="justify-self: unset; width: fit-content;"
+                            >
+                                ${tagButtonContainer.lastChild.textContent}
+                            </p>
+                                    <div class="move-buttons-container">
+                                        <button onclick="moveLeft(event)" id="move-idea-left"><-</button>
+                                        <button onclick="moveRight(event)" id="move-idea-right">-></button>
+                                    </div>
+                        </div>                        
+                    </div>`
                 insertingIdeas(htmlStringThinked, thinkedIdeasheadingContiner)
                 ideasCounting.counterUpdate(thinkedIdeasContainer, 'thinked')
                 thinkedIdeasCounterHTML.textContent = ideasCounting.counterThinked
                 break
             case 'working':
                 const htmlStringThinkedWorking = `
-        <div data-idea="working" class="idea-container">
-            <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
-            <p class="idea-description">${newIdeaDescriptionResult}</p>
-            <p 
-                class="${tagButtonContainer.lastElementChild.classList[0]}"
-                style="justify-self: unset; width: fit-content;"
-            >
-                ${tagButtonContainer.lastChild.textContent}</p>
-        </div>`
+                    <div data-idea="working" class="idea-container">
+                    <div class="heading-idea-delete-container">
+                        <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
+                        <button onclick="deleteIdea(event)" id="delete-idea" class="delete-idea">X</button>
+                    </div>
+                        <p class="idea-description">${newIdeaDescriptionResult}</p>
+                        <div class="tag-moving-buttons-containaer">
+                            <p 
+                                class="${tagButtonContainer.lastElementChild.classList[0]}"
+                                style="justify-self: unset; width: fit-content;"
+                            >
+                                ${tagButtonContainer.lastChild.textContent}
+                            </p>
+                                    <div class="move-buttons-container">
+                                        <button onclick="moveLeft(event)" id="move-idea-left"><-</button>
+                                        <button onclick="moveRight(event)" id="move-idea-right">-></button>
+                                    </div>
+                        </div>                          
+                    </div>`
                 insertingIdeas(htmlStringThinkedWorking, workingIdeasHeadingContainer)
                 ideasCounting.counterUpdate(workingIdeasContainer, 'working')
                 workingIdeasCounterHTML.textContent = ideasCounting.counterWorking
                 break
             case 'realized':
                 const htmlStringThinkedRealized = `
-        <div data-idea="realized" class="idea-container">
-            <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
-            <p class="idea-description">${newIdeaDescriptionResult}</p>
-            <p 
-                class="${tagButtonContainer.lastElementChild.classList[0]}"
-                style="justify-self: unset; width: fit-content;"
-            >
-                ${tagButtonContainer.lastChild.textContent}</p>
-        </div>`
+                    <div data-idea="realized" class="idea-container">
+                    <div class="heading-idea-delete-container">
+                        <h1 class="idea-heading">${newIdeaNameInputResult}</h1>
+                        <button onclick="deleteIdea(event)" id="delete-idea" class="delete-idea">X</button>
+                    </div>
+                        <p class="idea-description">${newIdeaDescriptionResult}</p>
+                        <div class="tag-moving-buttons-containaer">
+                            <p 
+                                class="${tagButtonContainer.lastElementChild.classList[0]}"
+                                style="justify-self: unset; width: fit-content;"
+                            >
+                                ${tagButtonContainer.lastChild.textContent}
+                            </p>
+                                    <div class="move-buttons-container">
+                                        <button onclick="moveLeft(event)" id="move-idea-left"><-</button>
+                                        <button onclick="moveRight(event)" id="move-idea-right">-></button>
+                                    </div>
+                        </div>                          
+                    </div>`
                 insertingIdeas(htmlStringThinkedRealized, realizedIdeasHeadingContainer)
                 ideasCounting.counterUpdate(realizedIdeasContainer, 'realized')
-                realizedIdeasCounterHTML.textContent = ideasCounting.counterRealized                
+                realizedIdeasCounterHTML.textContent = ideasCounting.counterRealized
                 break
         }
     } else {
         alert('Заполни поля!')
     }
 })
+
+
