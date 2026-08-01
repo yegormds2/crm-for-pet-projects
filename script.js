@@ -31,6 +31,42 @@ const moveIdeaLeftButton = document.getElementById('move-idea-left')
 const moveIdeaRightButton = document.getElementById('move-idea-right')
 const deleteIdeaButton = document.getElementById('delete-idea')
 
+
+
+function updateCounters() {
+    const rawCount = rawIdeasContainer.querySelectorAll(
+        '.idea-container[data-idea="raw"]'
+    ).length;
+
+    const thinkedCount = thinkedIdeasContainer.querySelectorAll(
+        '.idea-container[data-idea="thinked"]'
+    ).length;
+
+    const workingCount = workingIdeasContainer.querySelectorAll(
+        '.idea-container[data-idea="working"]'
+    ).length;
+
+    const realizedCount = realizedIdeasContainer.querySelectorAll(
+        '.idea-container[data-idea="realized"]'
+    ).length;   
+
+    rawIdeasCounterHTML.textContent =
+        rawCount;
+
+    thinkedIdeasCounterHTML.textContent =
+        thinkedCount;
+
+    workingIdeasCounterHTML.textContent =
+        workingCount;
+
+    realizedIdeasCounterHTML.textContent =
+        realizedCount;
+    console.log(typeof rawCount)
+}
+
+updateCounters()
+
+
 const ideasTypeContainers = [
     rawIdeasContainer,
     thinkedIdeasContainer,
@@ -88,20 +124,9 @@ const ideasCounting = {
     }
 }
 
-function updateAllCounters() {
-    ideasTypeContainers.forEach(el => {
-        ideasCounting.counterUpdate(el, el.dataset.idea)
-    })
-    rawIdeasCounterHTML.dataset.counter = ideasCounting.counterRaw
-    thinkedIdeasCounterHTML.dataset.counter = ideasCounting.counterThinked
-    workingIdeasCounterHTML.dataset.counter = ideasCounting.counterWorking
-    realizedIdeasCounterHTML.dataset.counter = ideasCounting.counterRealized
-}
-
-updateAllCounters()
-ideasTypeCountersHTML.forEach(el => {
-    el.textContent = el.dataset.counter
-})
+// ideasTypeCountersHTML.forEach(el => {
+//     el.textContent = el.dataset.counter
+// })
 
 const tagElements = {
     mobileApp: document.querySelector('.idea-tag-option-mobile-app'),
@@ -233,7 +258,7 @@ const parentHeadingsToAdd = [
     thinkedIdeasheadingContiner,
     workingIdeasHeadingContainer,
     realizedIdeasHeadingContainer
-    ]
+]
 
 const addNewRawIdeaButton = document.querySelector('[data-AddNewIdeaType="raw"]')
 const addNewThinkingIdeaButton = document.querySelector('[data-AddNewIdeaType="thinked"]')
@@ -245,44 +270,55 @@ const addNewButtons = [
     addNewThinkingIdeaButton,
     addNewWorkedIdeaButton,
     addNewRealizedIdeaButton
-    ]
+]
 
 const moveRight = (e) => {
-    console.log(e.target.parentElement.parentElement.parentElement.parentElement)
-    switch (e.target.parentElement.parentElement.parentElement.parentElement.dataset.idea) {
+    const card = e.target.closest('.idea-container')
+    console.log(card.dataset.idea)
+    switch (card.dataset.idea) {
         case 'raw':
-            addNewThinkingIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            card.dataset.idea = 'thinked';
+            addNewThinkingIdeaButton.insertAdjacentElement('beforebegin', card)
             break
         case 'thinked':
-            addNewWorkedIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            card.dataset.idea = 'working';
+            addNewWorkedIdeaButton.insertAdjacentElement('beforebegin', card)
             break
         case 'working':
-            addNewRealizedIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            card.dataset.idea = 'realized';
+            addNewRealizedIdeaButton.insertAdjacentElement('beforebegin', card)
             break
-    }    
+    }
+    updateCounters()
 }
 
 const moveLeft = (e) => {
-    console.log(e.target.parentElement.parentElement.parentElement.parentElement)
-    switch (e.target.parentElement.parentElement.parentElement.parentElement.dataset.idea) {
+    const card = e.target.closest('.idea-container');
+    console.log(card)
+    switch (card.dataset.idea) {
         case 'realized':
-            addNewWorkedIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            card.dataset.idea = 'working';
+            addNewWorkedIdeaButton.insertAdjacentElement('beforebegin', card)
             break
         case 'working':
-            addNewThinkingIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            card.dataset.idea = 'thinked';
+            addNewThinkingIdeaButton.insertAdjacentElement('beforebegin', card)
             break
         case 'thinked':
-            addNewRawIdeaButton.insertAdjacentElement('beforebegin', e.target.parentElement.parentElement.parentElement)
+            card.dataset.idea = 'raw';
+            addNewRawIdeaButton.insertAdjacentElement('beforebegin', card)
             break
     }
+    updateCounters()
 }
 
 const deleteIdea = (e) => {
     e.target.parentElement.parentElement.remove()
+    updateCounters()
 }
-moveIdeaRightButton.addEventListener('click', moveRight)
-moveIdeaLeftButton.addEventListener('click', moveLeft)
-deleteIdeaButton.addEventListener('click', deleteIdea)
+// moveIdeaRightButton.addEventListener('click', moveRight)
+// moveIdeaLeftButton.addEventListener('click', moveLeft)
+// deleteIdeaButton.addEventListener('click', deleteIdea)
 
 
 // ИСПРАВИТЬ СЧЕТКИ В ЗАГОЛОВКАХ КОЛЧИСТВА ИДЕЙ
@@ -311,8 +347,8 @@ saveNewIdeaButton.addEventListener('click', () => {
                         </div>
                     </div>`
                 insertingIdeas(htmlString, rawIdeasHeadingContainer)
-                ideasCounting.counterUpdate(rawIdeasContainer, 'raw')
-                rawIdeasCounterHTML.textContent = ideasCounting.counterRaw
+                // ideasCounting.counterUpdate(rawIdeasContainer, 'raw')
+                // rawIdeasCounterHTML.textContent = ideasCounting.counterRaw
                 break
             case 'thinked':
                 const htmlStringThinked = `
@@ -336,8 +372,8 @@ saveNewIdeaButton.addEventListener('click', () => {
                         </div>                        
                     </div>`
                 insertingIdeas(htmlStringThinked, thinkedIdeasheadingContiner)
-                ideasCounting.counterUpdate(thinkedIdeasContainer, 'thinked')
-                thinkedIdeasCounterHTML.textContent = ideasCounting.counterThinked
+                // ideasCounting.counterUpdate(thinkedIdeasContainer, 'thinked')
+                // thinkedIdeasCounterHTML.textContent = ideasCounting.counterThinked
                 break
             case 'working':
                 const htmlStringThinkedWorking = `
@@ -361,8 +397,8 @@ saveNewIdeaButton.addEventListener('click', () => {
                         </div>                          
                     </div>`
                 insertingIdeas(htmlStringThinkedWorking, workingIdeasHeadingContainer)
-                ideasCounting.counterUpdate(workingIdeasContainer, 'working')
-                workingIdeasCounterHTML.textContent = ideasCounting.counterWorking
+                // ideasCounting.counterUpdate(workingIdeasContainer, 'working')
+                // workingIdeasCounterHTML.textContent = ideasCounting.counterWorking
                 break
             case 'realized':
                 const htmlStringThinkedRealized = `
@@ -386,10 +422,11 @@ saveNewIdeaButton.addEventListener('click', () => {
                         </div>                          
                     </div>`
                 insertingIdeas(htmlStringThinkedRealized, realizedIdeasHeadingContainer)
-                ideasCounting.counterUpdate(realizedIdeasContainer, 'realized')
-                realizedIdeasCounterHTML.textContent = ideasCounting.counterRealized
+                // ideasCounting.counterUpdate(realizedIdeasContainer, 'realized')
+                // realizedIdeasCounterHTML.textContent = ideasCounting.counterRealized
                 break
         }
+        updateCounters()
     } else {
         alert('Заполни поля!')
     }
