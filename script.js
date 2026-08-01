@@ -199,7 +199,7 @@ Object.values(tagElements).forEach(el => {
     el.addEventListener('click', (e) => {
         chooseTagButton.style.display = 'none'
         switch (e.target.textContent) {
-            case 'Мобильноеприложение':
+            case 'Мобильное приложение':
                 tagButtonContainer.append(el.cloneNode(true))
                 tagButtonContainer.lastChild.addEventListener('click', chooseTagButon)
                 chooseTagContainer.style.display = 'none'
@@ -320,8 +320,6 @@ const deleteIdea = (e) => {
 // moveIdeaLeftButton.addEventListener('click', moveLeft)
 // deleteIdeaButton.addEventListener('click', deleteIdea)
 
-
-// ИСПРАВИТЬ СЧЕТКИ В ЗАГОЛОВКАХ КОЛЧИСТВА ИДЕЙ
 saveNewIdeaButton.addEventListener('click', () => {
     if (newIdeaNameInputResult !== '' && newIdeaDescriptionResult !== '' && tagButtonContainer.lastChild.tagName == 'P') {
         switch (whereToPlaceNewIdea) {
@@ -347,8 +345,6 @@ saveNewIdeaButton.addEventListener('click', () => {
                         </div>
                     </div>`
                 insertingIdeas(htmlString, rawIdeasHeadingContainer)
-                // ideasCounting.counterUpdate(rawIdeasContainer, 'raw')
-                // rawIdeasCounterHTML.textContent = ideasCounting.counterRaw
                 break
             case 'thinked':
                 const htmlStringThinked = `
@@ -372,8 +368,6 @@ saveNewIdeaButton.addEventListener('click', () => {
                         </div>                        
                     </div>`
                 insertingIdeas(htmlStringThinked, thinkedIdeasheadingContiner)
-                // ideasCounting.counterUpdate(thinkedIdeasContainer, 'thinked')
-                // thinkedIdeasCounterHTML.textContent = ideasCounting.counterThinked
                 break
             case 'working':
                 const htmlStringThinkedWorking = `
@@ -397,8 +391,6 @@ saveNewIdeaButton.addEventListener('click', () => {
                         </div>                          
                     </div>`
                 insertingIdeas(htmlStringThinkedWorking, workingIdeasHeadingContainer)
-                // ideasCounting.counterUpdate(workingIdeasContainer, 'working')
-                // workingIdeasCounterHTML.textContent = ideasCounting.counterWorking
                 break
             case 'realized':
                 const htmlStringThinkedRealized = `
@@ -422,8 +414,6 @@ saveNewIdeaButton.addEventListener('click', () => {
                         </div>                          
                     </div>`
                 insertingIdeas(htmlStringThinkedRealized, realizedIdeasHeadingContainer)
-                // ideasCounting.counterUpdate(realizedIdeasContainer, 'realized')
-                // realizedIdeasCounterHTML.textContent = ideasCounting.counterRealized
                 break
         }
         updateCounters()
@@ -431,5 +421,3 @@ saveNewIdeaButton.addEventListener('click', () => {
         alert('Заполни поля!')
     }
 })
-
-

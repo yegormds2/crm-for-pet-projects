@@ -31,6 +31,64 @@ body {
     src: url('assets/fonts/progoth.ttf') format('truetype');
 }
 
+.idea-inner-content-container {
+    display: block;
+    overflow-wrap: break-word;
+    /* max-width: 50vw; */
+    /* position: absolute; */
+    /* inset: 0;
+    place-self: center; */
+    background-color: #FFF6E3;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    box-shadow: 0px 2px 0px 0px #b0b0b0e5,
+        0px -2px 0px 0px #b0b0b0e5,
+        2px 0px 0px 0px #b0b0b0e5,
+        -2px 0px 0px 0px #b0b0b0e5;
+}
+
+.idea-inner-content-headings-close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.idea-inner-content-heading {
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.idea-inner-content-heading {
+    color: #23224B;
+    font-family: 'progoth';
+}
+
+
+.delete-idea-inner {
+    cursor: url('/assets/cursors/pointer.svg'), auto;
+    border: none;
+    font-family: 'progoth';
+    font-size: 15px;
+    color: #f70000;
+    background-color: transparent;
+}
+
+.inner-raw-idea-description {
+    color: #23224B;
+    font-family: 'JF Dot Shinonome Gothic 14';
+    font-size: 15px;
+    letter-spacing: -20%;
+    line-height: 140%;
+    margin: 0;
+    text-wrap: break-word;
+}
+
 .choose-tag-container {
     position: absolute;
     inset: 0;
@@ -117,14 +175,11 @@ body {
 
 
 .app-content {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 20px;
     position: relative;
-    /* filter: blur(2px); */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    place-items: start;
-    gap: 10px;
+    place-items: center;
 }
 
 .new-idea-container {
@@ -327,13 +382,26 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow-wrap: break-word;
     /* cursor: url('/assets/cursors/pointer.svg'), auto; */
     position: relative;
+}
+
+.idea-container:hover .delete-idea {
+    display: block;
+}
+
+.idea-container:hover .move-buttons-container {
+    display: block;
 }
 
 .tag-moving-buttons-containaer {
     display: flex;
     justify-content: space-between;
+}
+
+.move-buttons-container {
+    display: none;
 }
 
 .move-buttons-container button {
@@ -354,12 +422,13 @@ body {
 }
 
 .delete-idea {
+    display: none;
     cursor: url('/assets/cursors/pointer.svg'), auto;
     border: none;
     font-family: 'progoth';
     font-size: 15px;
     color: #f70000;
-    background-color: transparent;    
+    background-color: transparent;
 }
 
 .raw-ideas-icon {
@@ -371,19 +440,25 @@ body {
 }
 
 .idea-heading {
+    max-width: 300px;
     color: #23224B;
     margin: 0px;
     font-family: 'progoth';
     font-size: 19px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .idea-description {
+    max-width: 300px;
     color: #23224B;
     font-family: 'JF Dot Shinonome Gothic 14';
     font-size: 15px;
     letter-spacing: -20%;
     line-height: 140%;
     margin: 0;
+    text-wrap: break-word;
 }
 
 .idea-tag {
